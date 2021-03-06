@@ -53,7 +53,10 @@ function clearResult() {
 }
 
 function sendNumberValue(number) {
-  if (resultIsShowed) clearResult();
+  if (resultIsShowed) {
+    equationDisplay.textContent = "\u00A0";
+    clearResult();
+  }
   if (awaitingNextValue) {
     calculatorDisplay.textContent = number;
     awaitingNextValue = false;
@@ -135,10 +138,6 @@ function useOperator(operator) {
   updateOperator(operator);
   awaitingNextValue = true;
   operatorValue = operator;
-  // if (!awaitingNextValue) {
-  //   firstValue = currentValue;
-  //
-  // }
 
   showEquation();
   calculatorDisplay.scrollTo(calculatorDisplay.scrollWidth, 0);
