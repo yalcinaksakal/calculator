@@ -73,7 +73,6 @@ function addDecimal() {
   if (!calculatorDisplay.textContent.includes("."))
     calculatorDisplay.textContent = `${calculatorDisplay.textContent}.`;
   calculatorDisplay.scrollTo(calculatorDisplay.scrollWidth, 0);
-  console.log(values, operatorValue);
 }
 
 function updateOperator(char, slice = false) {
@@ -107,10 +106,15 @@ function useOperator(operator) {
   // }
 
   calculatorDisplay.scrollTo(calculatorDisplay.scrollWidth, 0);
-
-  console.log(values, operator);
 }
+//reset dispay
 
+function resetAll() {
+  calculatorDisplay.textContent = "0";
+  values = [];
+  operatorValue = "";
+  awaitingNextValue = false;
+}
 //eventlisteners for numbers,operators, decimal
 
 inputBtns.forEach(btn => {
@@ -121,14 +125,5 @@ inputBtns.forEach(btn => {
   else if (btn.classList.contains("decimal"))
     btn.addEventListener("click", addDecimal);
 });
-
-//reset dispay
-
-function resetAll() {
-  calculatorDisplay.textContent = "0";
-  values = [];
-  operatorValue = "";
-  awaitingNextValue = false;
-}
 
 clearBtn.addEventListener("click", resetAll);
