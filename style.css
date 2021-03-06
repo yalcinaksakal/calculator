@@ -1,0 +1,114 @@
+html {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right bottom, #4286f4aa, #373b44);
+}
+
+.calculator {
+  background: whitesmoke;
+  width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 5px 30px -5px rgba(0, 0, 0, 0.6);
+}
+/* display */
+.calculator-display {
+  background: black;
+  color: white;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px 12px 0 0;
+}
+
+.calculator-display h1 {
+  width: 94%;
+  margin: 0;
+  padding: 35px 10px;
+  font-size: 45px;
+  font-family: "Lucida Console", sans-serif;
+  font-weight: 100;
+  text-align: end;
+  overflow-x: overlay;
+}
+
+/* custom scrollbar */
+
+::-webkit-scrollbar {
+  background: rgb(112, 112, 112);
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(48, 48, 48);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4286f4aa;
+  border-radius: 2px;
+  direction: rtl;
+}
+
+/* buttons */
+.calculator-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+button {
+  min-height: 50px;
+  font-size: 20px;
+  font-weight: 150;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: rgb(194, 194, 194);
+  user-select: none;
+}
+
+button:hover {
+  filter: brightness(110%);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+button:focus {
+  outline: none;
+}
+
+.operator {
+  background-color: gray;
+  color: white;
+  font-size: 40px;
+}
+.clear {
+  background: rgb(230, 40, 40);
+  color: white;
+}
+.clear:hover {
+  filter: brightness(90%);
+}
+.equal-sign {
+  grid-column: -2;
+  grid-row: 2 / span 4;
+  background: rgb(16, 172, 76);
+}
+
+/* media query */
+
+@media screen and (max-width: 600px) {
+  .calculator {
+    width: 95%;
+  }
+}
