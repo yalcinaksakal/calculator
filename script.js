@@ -42,6 +42,8 @@ function calculate() {
   }
   resetAll();
   resultIsShowed = true;
+  result = result.toString();
+  result = +result;
   if (result.countDecimals() > 5) result = result.toFixed(5);
   calculatorDisplay.textContent = result + "=";
 }
