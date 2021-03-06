@@ -1,4 +1,6 @@
-const calculatorDisplay = document.querySelector("h1");
+const calculatorDisplay = document.getElementById("calcDisplay");
+const equationDisplay = document.getElementById("eqDisplay");
+
 const inputBtns = document.querySelectorAll("button");
 const clearBtn = document.getElementById("clear-btn");
 
@@ -14,8 +16,15 @@ Number.prototype.countDecimals = function () {
   return this.toString().split(".")[1].length || 0;
 };
 
+function showEquation() {
+  equationDisplay.textContent = `${values[0]} ${
+    operatorValue === "*" ? "×" : operatorValue
+  }${values[1] ? " " + values[1] : ""}`;
+}
+
 ///
 function calculate() {
+  showEquation();
   let result;
   switch (operatorValue) {
     case "+":
@@ -55,10 +64,27 @@ function sendNumberValue(number) {
     calculatorDisplay.scrollTo(calculatorDisplay.scrollWidth, 0);
   }
 }
+function newOperation(operator) {
+  //clear '=' sign
+  updateOperator("", true);
+  values = [];
+  resultIsShowed = false;
+  if (operator === ".") {
+    operatorValue = "";
+    awaitingNextValue = false;
+    addDecimal();
+    return;
+  }
+  values.push(Number(calculatorDisplay.textContent));
+  updateOperator(operator);
+  operatorValue = operator;
+  showEquation();
+  awaitingNextValue = true;
+}
 
 function addDecimal() {
   if (resultIsShowed) {
-    clearResult();
+    newOperation(".");
     return;
   }
   //if operator pressed
@@ -84,15 +110,24 @@ function updateOperator(char, slice = false) {
 
 function useOperator(operator) {
   if (resultIsShowed) {
-    clearResult();
+    newOperation(operator);
     return;
   }
   if (awaitingNextValue) {
     updateOperator(operator, true);
     operatorValue = operator;
+    showEquation();
     return;
   }
+  if (calculatorDisplay.textContent.slice(-1) === ".") updateOperator("", true);
   values.push(Number(calculatorDisplay.textContent));
+
+  //check if maxint exceeded
+  if (!(String(values[values.length - 1]) === calculatorDisplay.textContent)) {
+    equationDisplay.textContent = "err";
+    resetAll();
+    return;
+  }
   if (values.length === 2) {
     calculate();
     return;
@@ -105,6 +140,7 @@ function useOperator(operator) {
   //
   // }
 
+  showEquation();
   calculatorDisplay.scrollTo(calculatorDisplay.scrollWidth, 0);
 }
 //reset dispay
@@ -126,4 +162,7 @@ inputBtns.forEach(btn => {
     btn.addEventListener("click", addDecimal);
 });
 
-clearBtn.addEventListener("click", resetAll);
+clearBtn.addEventListener("click", () => {
+  equationDisplay.textContent = "\u00A0";
+  resetAll();
+});

@@ -17,6 +17,29 @@ body {
   border-radius: 12px;
   box-shadow: 0 5px 30px -5px rgba(0, 0, 0, 0.6);
 }
+
+/* equation display */
+/* display */
+.equation-display {
+  background: black;
+  color: dodgerblue;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px 12px 0 0;
+}
+
+.equation-display h1 {
+  width: 94%;
+  margin: 0;
+  padding: 15px 15px;
+  font-size: 13px;
+  font-family: "Lucida Console", sans-serif;
+  font-weight: 100;
+  text-align: end;
+}
+
 /* display */
 .calculator-display {
   background: black;
@@ -25,13 +48,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px 12px 0 0;
 }
 
 .calculator-display h1 {
   width: 94%;
   margin: 0;
-  padding: 35px 10px;
+  padding: 0px 10px 20px 10px;
   font-size: 45px;
   font-family: "Lucida Console", sans-serif;
   font-weight: 100;
